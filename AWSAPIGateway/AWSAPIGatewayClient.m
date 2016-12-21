@@ -176,6 +176,11 @@ static int defaultChunkSize = 1024;
         return nil;
     }];
     
+    // AVAI OVERRIDE
+    if ([headerParameters objectForKey:@"Authorization"]) {
+        [request setValue:[headerParameters objectForKey:@"Authorization"] forHTTPHeaderField:@"Authorization"];
+    }
+    
     // Signs the request
     for (id<AWSNetworkingRequestInterceptor> interceptor in self.configuration.requestInterceptors) {
         task = [task continueWithSuccessBlock:^id(AWSTask *task) {
